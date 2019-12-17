@@ -9,7 +9,7 @@ TABLE_NAME = ARGV[0]
 class TargetTable < ActiveRecord::Base
   self.table_name = TABLE_NAME
 end
-TargetTable.establish_connection(ENV['HEROKU_DB_URL'])
+TargetTable.establish_connection(ENV['DB_URL'])
 
 # Define CSV file name
 csv_file = TABLE_NAME + '.csv'
