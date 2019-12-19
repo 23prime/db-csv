@@ -4,17 +4,17 @@ require 'csv'
 
 # Define table names
 TABLE_NAME = File.basename(ARGV[0], '.csv')
-SCHEMA_NAME = ''
-SCHEMA_NAME = ARGV[1] + '.' if ARGV.size > 1
+$schema_name = ''
+$schema_name = ARGV[1] if ARGV.size > 1
 
-puts "TABLE_NAME:  #{TABLE_NAME}"
-puts "SCHEMA_NAME: #{SCHEMA_NAME}"
+puts "table_name:  #{TABLE_NAME}"
+puts "schema_name: #{$schema_name}"
 
 # Define table class
 class TargetTable < ActiveRecord::Base
-  self.table_name = SCHEMA_NAME + TABLE_NAME
+  self.table_name = $schema_name + '.' + TABLE_NAME
 end
 TargetTable.establish_connection(ENV['DB_URL'])
 
 # Define CSV file name
-CSV_FILE = TABLE_NAME + '.csv'
+CSV_FILE = "csv/#{TABLE_NAME}.csv"
